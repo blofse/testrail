@@ -1,5 +1,3 @@
-#!/bin/bash -e
+#!/bin/sh
 
-/etc/init.d/apache2 start
-sleep infinity
-
+httpd -D FOREGROUND
