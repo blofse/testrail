@@ -2,9 +2,14 @@ FROM alpine
 
 ENV IONCUBE_VERSION=6.0.9
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
 # Setup apache and php
 RUN \ 
-  apk --update add php5 apache2 php5-apache2 curl php5-cli php5-mysql php5-curl wget unzip \
+  apk update && apk upgrade \
+  && apk add --no-cache apache2 \
+  && apk add --no-cache php7-apache2 php7-mysqli php7-curl php7-mbstring \
+  && apk add --no-cache curl wget unzip \
   && rm -f /var/cache/apk/* \
   && mkdir /run/apache2 \
   && sed -i 's/#LoadModule\ rewrite_module/LoadModule\ rewrite_module/' /etc/apache2/httpd.conf \
@@ -15,7 +20,7 @@ RUN wget -O ioncube_loaders_lin_x86-64_${IONCUBE_VERSION}.tar.gz --no-verbose "h
     rm -f ioncube_loaders_lin_*.tar.gz
 
 RUN \
-  sed -i 's~;zend.script_encoding\ =~zend_extension=/ioncube/ioncube_loader_lin_5.6.so~' /etc/php5/php.ini
+  sed -i 's~;zend.script_encoding\ =~zend_extension=/ioncube/ioncube_loader_lin_7.0.so~' /etc/php7/php.ini
 
 COPY testrail-*.zip /
 RUN cd /var/www/localhost/htdocs && unzip -q /testrail-*.zip
@@ -30,6 +35,6 @@ RUN \
 COPY config.php /var/www/localhost/htdocs/config.php
 COPY run.sh /
 
-RUN chmod +x run.sh
+RUN chmod +x /run.sh
 
 ENTRYPOINT ["/run.sh"]
