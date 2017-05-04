@@ -8,7 +8,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 RUN \ 
   apk update && apk upgrade \
   && apk add --no-cache apache2 \
-  && apk add --no-cache php7-apache2 php7-mysqli php7-curl php7-mbstring \
+  && apk add --no-cache php php-apache2 php-mysqli php-curl php-cli \
   && apk add --no-cache curl wget unzip \
   && rm -f /var/cache/apk/* \
   && mkdir /run/apache2 \
@@ -20,7 +20,7 @@ RUN wget -O ioncube_loaders_lin_x86-64_${IONCUBE_VERSION}.tar.gz --no-verbose "h
     rm -f ioncube_loaders_lin_*.tar.gz
 
 RUN \
-  sed -i 's~;zend.script_encoding\ =~zend_extension=/ioncube/ioncube_loader_lin_7.0.so~' /etc/php7/php.ini
+  sed -i 's~;zend.script_encoding\ =~zend_extension=/ioncube/ioncube_loader_lin_5.6.so~' /etc/php/php.ini
 
 COPY testrail-*.zip /
 RUN cd /var/www/localhost/htdocs && unzip -q /testrail-*.zip
