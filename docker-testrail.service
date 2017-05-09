@@ -6,7 +6,7 @@ After=docker-testrail-mysql.service
 [Service]
 User=root
 Restart=always
-ExecStart=/usr/bin/docker start -a testrail --link testrail-mysql:testrail
+ExecStart=/usr/bin/docker start -a testrail
 ExecStop=/usr/bin/docker stop -t 2 testrail
 
 [Install]
