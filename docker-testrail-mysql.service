@@ -1,0 +1,13 @@
+[Unit]
+Description=Docker - Testrail - Mysql container
+Requires=docker.service
+After=docker.service
+
+[Service]
+User=root
+Restart=always
+ExecStart=/usr/bin/docker start -a testrail-mysql
+ExecStop=/usr/bin/docker stop -t 2 testrail-mysql
+
+[Install]
+WantedBy=default.target
