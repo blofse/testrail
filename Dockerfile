@@ -20,8 +20,7 @@ RUN cd /var/www/html && unzip -q /testrail-*.zip
 RUN mkdir /var/www/html/testrail/logs
 RUN chown www-data /var/www/html/testrail/logs
 RUN echo '* * * * * www-data /usr/bin/php /var/www/html/testrail/task.php' > /etc/cron.d/testrail
-    
-COPY imports/config.php /var/www/html/testrail/config.php
+
 COPY run.sh /
 
 RUN chmod +x /run.sh
