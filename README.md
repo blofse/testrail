@@ -29,7 +29,7 @@ If the above step has not been complete, then below will initialise with an empt
 
 Run the following command, replacing *** with your desired db password:
 ```
-./initial_start '***'
+./initial_start.sh '***'
 ```
 This will setup two containers: 
 * testrail-mysql - a container to store your testrail db data
