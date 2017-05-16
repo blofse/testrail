@@ -13,9 +13,9 @@ Before running this docker image, please [clone / download the repo](https://git
 Shutdown the existing testrail server instance and backup the following:
 * config.php modified during the install, possibly located in /var/www/html/testrail/config.php
 * Mysqldump the existing testrail db into testrail.sql. An example is below:
-** mysqldump --databases testrail > testrail.sql
+ * mysqldump --databases testrail > testrail.sql
 
-Please modify permissions of localhost within the testrail.sql to generally be % (all locations) except for below which should remain lower case:
+Please modify permissions of localhost within the testrail.sql to generally be % (all locations) except for below which should remain localhost:
 ```
 INSERT INTO `proxies_priv` VALUES ('localhost','root','','',1,'boot@connecting host','0000-00-00 00:00:00');
 ```
