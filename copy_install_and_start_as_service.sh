@@ -11,6 +11,9 @@ yes | cp docker-testrail.service /etc/systemd/system/.
 systemctl daemon-reload
 
 echo Starting services
+systemctl enable docker-testrail-mysql
+systemctl enable docker-testrail
+
 systemctl start docker-testrail-mysql
 systemctl start docker-testrail
 
