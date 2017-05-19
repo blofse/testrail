@@ -27,6 +27,7 @@ if [ -f imports/attachment-reports.tar.gz ]; then
   echo Uploading and expanding attachments and reports
   docker cp imports/attachment-reports.tar.gz testrail:/opt/attachment-reports.tar.gz
   docker exec -i testrail tar -xzvf "/opt/attachment-reports.tar.gz" -C /opt
+  docker exec -i -u root testrail chown -R www-data /opt/testrail/
 fi
 
 echo Done!
