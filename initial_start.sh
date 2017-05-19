@@ -10,6 +10,6 @@ docker run --name testrail-mysql -e MYSQL_ROOT_PASSWORD="$1" -e MYSQL_DATABASE="
 echo About to sleep to give the server time to start up
 sleep 15
 echo Sleep over, now starting testrail container
-docker run -d --name testrail --link testrail-mysql:testrail -p 7070:80 testrail
+docker run -d --name testrail --link testrail-mysql:testrail -p 7070:80 -v TestrailAttachmentsReports:/opt/testrail testrail
 
 echo Done!
