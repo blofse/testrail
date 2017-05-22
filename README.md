@@ -8,24 +8,7 @@ Any feedback let me know - its all welcome!
 Before running this docker image, please [clone / download the repo](https://github.com/blofse/testrail), inlcuding the script files.
 
 # How to use this image
-## (optional) Migrating existing testrail servers
-
-Shutdown the existing testrail server instance and backup the following:
-* config.php modified during the install, possibly located in /var/www/html/testrail/config.php
-* Mysqldump the existing testrail db into testrail.sql. An example is below:
- * mysqldump --databases testrail > testrail.sql
-
-Please modify permissions of localhost within the testrail.sql to generally be % (all locations) except for below which should remain localhost:
-```
-INSERT INTO `proxies_priv` VALUES ('localhost','root','','',1,'boot@connecting host','0000-00-00 00:00:00');
-```
-
-Copy the files into the following locations, respective to the script file locations:
-* imports/config.php
-* imports/testrail.sql
-
 ## Initialise
-If the above step has not been complete, then below will initialise with an empty testrail db, otherwise your existing TR instance should be migrated also with the command below.
 
 Run the following command, replacing *** with your desired db password:
 ```
@@ -34,6 +17,29 @@ Run the following command, replacing *** with your desired db password:
 This will setup two containers: 
 * testrail-mysql - a container to store your testrail db data
 * testrail - the container containing the testrail server
+
+## (optional) Migrating existing testrail servers
+
+Shutdown the existing testrail server instance and backup the following:
+* config.php modified during the install, possibly located in /var/www/html/testrail/config.php
+* Mysqldump the existing testrail db into testrail.sql. An example is below:
+	* mysqldump --databases testrail > testrail.sql
+* Attachments and reports folder - usually found in /opt/testrail/attachments and /opt/testrail/reports, please place both folders inside a tar.gz containing the testrail directory.
+The tar should be structured:
+	* attachment-reports.tar.gz¬
+		* testrail\
+			* attachments\
+			* reports\
+
+Copy the files into the following locations, respective to the script file locations:
+* imports/config.php
+* imports/testrail.sql
+* imports/attachment-reports.tar.gz
+
+Once ready, run the following script, replacing *** with your db password:
+```
+./migrate_existing_db '***'
+```
 
 ## (optional) setting up as a service
 
