@@ -1,5 +1,5 @@
-# testrail
-A restartable docker image for test rail
+# testrail - A dcoker image containing version 5.3.0.3603-ion53
+A restartable docker image for testrail
 
 Any feedback let me know - its all welcome!
 
